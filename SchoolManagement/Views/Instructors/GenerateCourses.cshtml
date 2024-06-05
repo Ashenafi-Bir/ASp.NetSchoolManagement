@@ -1,0 +1,90 @@
+﻿@model SchoolManagement.ViewModels.GenerateCoursesViewModel
+@{
+    ViewData["Title"] = "GenerateCourses";
+}
+
+<div class="card">
+    <div class="card-header">
+        <form asp-action="GenerateCourses" asp-controller="Instructors" method="get">
+            <label asp-for="SearchId"></label>
+            <input asp-for="SearchId" placeholder="Enter ID" />
+            <button type="submit">Search</button>
+        </form>
+    </div>
+    <div class="card-body">
+        @if (Model.Instructor != null)
+        {
+            <dl class="row">
+                <dt class="col-sm-2">
+                    First Name
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Instructor.FirstName)
+                </dd>
+                <dt class="col-sm-2">
+                    Last Name
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Instructor.LastName)
+                </dd>
+                <dt class="col-sm-2">
+                    Hire Date
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Instructor.HireDate)
+                </dd>
+            </dl>
+        }
+        else
+        {
+            <p>No instructor found.</p>
+        }
+    </div>
+    <div class="card-footer">
+        @if (Model.Courses != null && Model.Courses.Any())
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Title
+                        </th>
+                        <th>
+                            Credits
+                        </th>
+                        <th>
+                            Department
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var course in Model.Courses)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => course.Title)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => course.Credits)
+                            </td>
+                            <td>
+                                @if (course.Department != null)
+                                {
+                                    @Html.DisplayFor(modelItem => course.Department.Name)
+                                }
+                                else
+                                {
+                                    <span class="text-danger">Unknown</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>No courses found.</p>
+        }
+    </div>
+</div>

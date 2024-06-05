@@ -1,0 +1,36 @@
+﻿@model IEnumerable<SchoolManagement.Models.CourseAssignment>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Course Assignment List</h1>
+
+<p>
+    <a class="btn btn-info me-2" asp-action="Create">Create New</a>
+</p>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Instructor: @item.Instructor.FirstName</h5>
+                    <p class="card-text">Course: @item.Course.Title</p>
+                    <div class="btn-group" role="group" aria-label="Actions">
+                        <a class="btn btn-sm btn-outline-primary me-2" asp-action="Edit" asp-route-id="@item.InstructorId">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a class="btn btn-sm btn-outline-info me-2" asp-action="Details" asp-route-id="@item.InstructorId">
+                            <i class="fas fa-info-circle"></i>
+                        </a>
+                        <a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@item.InstructorId">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,76 @@
+﻿@model SchoolManagement.ViewModels.CoursesInstructorsViewModel
+@{
+    ViewData["Title"] = "Courses and Instructors";
+}
+<div class="card">
+    <div class="card-header">
+        <form asp-action="CoursesInstructors" asp-controller="Department" method="get">
+            <label asp-for="SearchId"></label>
+            <input asp-for="SearchId" placeholder="enter id" />
+            <button type="submit">Search</button>
+        </form>
+    </div>
+    <div class="card-body">
+        @if (Model.Department != null)
+        {
+            <dl class="row">
+                <dt class="col-sm-2">
+                    Department Name
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Department.Name)
+                </dd>
+                <dt class="col-sm-2">
+                    College
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Department.College)
+                </dd>
+              
+            </dl>
+        }
+    </div>
+    <div class="card-footer">
+        @if (Model.Courses.Any())
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Course
+                        </th>
+                        <th>
+                            Credits
+                        </th>
+                        <th>
+                            Instructor Name
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var course in Model.Courses)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => course.Title)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => course.Credits)
+                            </td>
+                            <td>
+                                @if (course.Department != null)
+                                {
+                                    @* @Html.DisplayFor(modelItem => course.CourseAssignments) *@
+                                }
+                                else
+                                {
+                                    <span class="text-danger">Unknown</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>

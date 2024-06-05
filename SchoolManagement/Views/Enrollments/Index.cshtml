@@ -1,0 +1,53 @@
+﻿@model IEnumerable<SchoolManagement.Models.Enrollment>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Enrollment List</h1>
+
+<p>
+    <a class="btn btn-info me-2" asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Course)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Student)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Grade)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Course.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Grade)
+            </td>
+            <td>
+                    <a class="btn btn-sm btn-outline-primary me-2" asp-action="Edit" asp-route-id="@item.EnrollmentId">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <a class="btn btn-sm btn-outline-info me-2" asp-action="Details" asp-route-id="@item.EnrollmentId">
+                        <i class="fas fa-info-circle"></i>
+                    </a>
+                    <a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@item.EnrollmentId">
+                        <i class="fas fa-trash-alt"></i>
+                    </a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

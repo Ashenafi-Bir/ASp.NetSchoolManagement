@@ -1,0 +1,57 @@
+﻿@model IEnumerable<SchoolManagement.Models.Course>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Courses List</h1>
+
+<p>
+    <a class="btn btn-info me-2 " asp-action="Create">Create New</a>
+</p>
+<p>
+    <a class="btn btn-info me-2" asp-controller="CourseAssignments" asp-action="Index">Assign Courses</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Credits)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Department)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Credits)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Department.Name)
+            </td>
+            <td>
+                    <a class="btn btn-sm btn-outline-primary me-2" asp-action="Edit" asp-route-id="@item.CourseId">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <a class="btn btn-sm btn-outline-info me-2" asp-action="Details" asp-route-id="@item.CourseId">
+                        <i class="fas fa-info-circle"></i>
+                    </a>
+                    <a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@item.CourseId">
+                        <i class="fas fa-trash-alt"></i>
+                    </a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

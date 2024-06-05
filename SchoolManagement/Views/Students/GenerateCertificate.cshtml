@@ -1,0 +1,74 @@
+﻿@model SchoolManagment.ViewModels.CertificatesViewModel
+@{
+    ViewData["Title"] = "Generate Certificate";
+}
+<div class="card">
+    <div class="card-header">
+        <form asp-action="GenerateCertificate" asp-controller="Students" method="get">
+            <label asp-for="SearchId"></label>
+            <input asp-for="SearchId" placeholder="enter id" />
+            <button type="submit">Search</button>
+        </form>
+    </div>
+    <div class="card-body">
+        @if (Model.Student != null)
+        {
+            <dl class="row">
+                <dt class="col-sm-2">
+                    First Name
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Student.FirstName)
+                </dd>
+                <dt class="col-sm-2">
+                    Last Name
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Student.LastName)
+                </dd>
+                <dt class="col-sm-2">
+                    Enrollment Date
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Student.EnrollmentDate)
+                </dd>
+            </dl>
+        }
+    </div>
+    <div class="card-footer">
+        @if (Model.Enrollments.Any())
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Course
+                        </th>
+                        <th>
+                            Credits
+                        </th>
+                        <th>
+                            Grade
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Enrollments)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Course.Title)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Course.Credits)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Grade)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>
